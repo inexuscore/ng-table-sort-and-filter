@@ -1,0 +1,33 @@
+<div class="row mt-3">
+  <div class="col">
+    <h1>Sort & Filter Data Tables in Angular</h1>
+
+    <div class="form-group">
+      <input type="search" class="form-control" [(ngModel)]="filter" placeholder="Filter by name or capital">
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+            <th scope="col" sortable="capital" (sort)="onSort($event)" width="150">Capital</th>
+            <th scope="col" sortable="alpha3Code" (sort)="onSort($event)" class="text-center" width="100">A3 Code</th>
+            <th scope="col" sortable="population" (sort)="onSort($event)" class="text-center" width="150">Population</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let country of countries | country:filter">
+            <td>
+              <img class="d-inline-block" [src]="country.flag" alt="flag" width="30" height="20">
+              {{ country.name }}
+            </td>
+            <td>{{ country.capital }}</td>
+            <td class="text-center">{{ country.alpha3Code }}</td>
+            <td class="text-center">{{ country.population | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
